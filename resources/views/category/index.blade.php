@@ -2,27 +2,35 @@
 
 @section('main-content')
     <x-custom-card>
-        <div class="row gap-2 justify-content-center justify-content-md-between align-items-center mb-4 mx-0">
-            <div class="col-12 col-md-4 p-0">
+        <div class="row g-2 align-items-center mb-4">
+            <div class="col-12 col-lg-3">
                 <x-search-bar />
             </div>
-            <div class="col-12 col-md-7 p-0 d-flex align-items-center gap-2">
-                <select id="project_id" name="project_id" class="form-select border-grey">
-                    <option value="">Semua Project</option>
-                    @foreach ($projects as $project)
-                        <option value="{{ $project->id }}">{{ $project->name }}</option>
-                    @endforeach
-                </select>
+            <div class="col-12 col-lg-9">
+                <div class="d-flex flex-wrap align-items-center justify-content-start justify-content-lg-end gap-2">
+                    <select id="project_id" name="project_id" class="form-select border-grey" style="min-width: 150px; max-width: 200px;">
+                        <option value="">Semua Project</option>
+                        @foreach ($projects as $project)
+                            <option value="{{ $project->id }}">{{ $project->name }}</option>
+                        @endforeach
+                    </select>
 
-                <select id="status" name="status" class="form-select border-grey">
-                    <option value="">Semua Status</option>
-                    <option value="1">Aktif</option>
-                    <option value="0">Tidak Aktif</option>
-                </select>
+                    <select id="status" name="status" class="form-select border-grey" style="min-width: 150px; max-width: 200px;">
+                        <option value="">Semua Status</option>
+                        <option value="1">Aktif</option>
+                        <option value="0">Tidak Aktif</option>
+                    </select>
 
-                @can('access', 'create')
-                    <a href="{{ route('categories_add') }}" class="btn btn-blue">Tambah</a>
-                @endcan
+                    @can('access', 'update')
+                        <a href="{{ route('categories_reorder') }}" class="btn btn-outline-primary text-nowrap">
+                            <i class="bi bi-arrow-down-up"></i> Reorder
+                        </a>
+                    @endcan
+
+                    @can('access', 'create')
+                        <a href="{{ route('categories_add') }}" class="btn btn-blue text-nowrap">Tambah</a>
+                    @endcan
+                </div>
             </div>
         </div>
         <div id="categories"></div>

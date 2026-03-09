@@ -2,27 +2,29 @@
 
 @section('main-content')
     <x-custom-card>
-        <div class="row gap-2 justify-content-center justify-content-md-between align-items-center mb-4 mx-0">
-            <div class="col-12 col-md-4 p-0">
+        <div class="row g-2 align-items-center mb-4">
+            <div class="col-12 col-lg-3">
                 <x-search-bar />
             </div>
-            <div class="col-12 col-md-8 p-0 d-flex flex-wrap align-items-center gap-2">
-                <select id="role_id" class="form-select border-grey" style="max-width: 220px;">
-                    <option value="">Semua Role</option>
-                    @foreach ($roles as $role)
-                        <option value="{{ $role->id }}">{{ $role->name }}</option>
-                    @endforeach
-                </select>
+            <div class="col-12 col-lg-9">
+                <div class="d-flex flex-wrap align-items-center justify-content-start justify-content-lg-end gap-2">
+                    <select id="role_id" class="form-select border-grey" style="min-width: 150px; max-width: 220px;">
+                        <option value="">Semua Role</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
 
-                <select id="status" class="form-select border-grey" style="max-width: 170px;">
-                    <option value="">Semua Status</option>
-                    <option value="1">Aktif</option>
-                    <option value="0">Tidak Aktif</option>
-                </select>
+                    <select id="status" class="form-select border-grey" style="min-width: 140px; max-width: 170px;">
+                        <option value="">Semua Status</option>
+                        <option value="1">Aktif</option>
+                        <option value="0">Tidak Aktif</option>
+                    </select>
 
-                @can('access', 'create')
-                    <a href="{{ route('users_add') }}" class="btn btn-blue">Tambah</a>
-                @endcan
+                    @can('access', 'create')
+                        <a href="{{ route('users_add') }}" class="btn btn-blue text-nowrap">Tambah</a>
+                    @endcan
+                </div>
             </div>
         </div>
 

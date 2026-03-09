@@ -34,3 +34,4 @@ class Task extends Model
         return $this->belongsTo(Admin::class, 'created_by_admin_id', 'id');
     }
 }
+

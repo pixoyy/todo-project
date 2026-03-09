@@ -27,7 +27,14 @@ class CategoryRequest extends FormRequest
                     ->ignore($id),
             ],
             'color' => 'nullable|string|max:20',
-            'order' => 'nullable|integer|min:0',
+            'order' => [
+                'nullable',
+                'integer',
+                'min:0',
+                Rule::unique('categories', 'order')
+                    ->where(fn ($q) => $q->where('project_id', $this->project_id)->whereNull('deleted_at'))
+                    ->ignore($id),
+            ],
             'status' => 'required|integer|in:0,1',
         ];
     }
@@ -43,6 +50,7 @@ class CategoryRequest extends FormRequest
             'color.max' => 'Kode warna maksimal 20 karakter.',
             'order.integer' => 'Urutan harus berupa angka.',
             'order.min' => 'Urutan minimal 0.',
+            'order.unique' => 'Urutan sudah digunakan pada project ini.',
             'status.required' => 'Status category wajib dipilih.',
             'status.in' => 'Status category tidak valid.',
         ];

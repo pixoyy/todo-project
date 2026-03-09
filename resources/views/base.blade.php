@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @php $module = App\Helper\Helper::getModuleName(); @endphp
-    <title>{{ isset($module) ? $module . ' - STI' : 'Sangha Theravada Indonesia' }}</title>
+    <title>{{ isset($module) ? $module . ' - TODO' : 'TODO' }}</title>
     {{-- <link rel="icon" href="{{ asset('images/logo.png') }}" /> --}}
 
     {{-- Fonts --}}

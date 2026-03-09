@@ -2,65 +2,42 @@
 
 @section('main-content')
     <x-custom-card>
-        {{-- <div class="d-flex align-items-center gap-2 flex-nowrap overflow-auto mb-4 pb-1">
-            <div style="min-width: 240px;">
+        <div class="row g-2 align-items-center mb-4">
+            <div class="col-12 col-lg-3">
                 <x-search-bar />
             </div>
+            <div class="col-12 col-lg-9">
+                <div class="d-flex flex-wrap align-items-center justify-content-start justify-content-lg-end gap-2">
+                    <select id="project_id" name="project_id" class="form-select border-grey" style="min-width: 150px; max-width: 200px;">
+                        <option value=""> Project</option>
+                        @foreach ($projects as $project)
+                            <option value="{{ $project->id }}">{{ $project->name }}</option>
+                        @endforeach
+                    </select>
 
-            <div class="d-flex align-items-center gap-2 flex-nowrap">
-                <select id="project_id" class="form-select border-grey" style="max-width: 200px;">
-                    <option value="">Semua Project</option>
-                    @foreach ($projects as $project)
-                        <option value="{{ $project->id }}">{{ $project->name }}</option>
-                    @endforeach
-                </select>
+                    <select id="category_id" name="category_id" class="form-select border-grey" style="min-width: 150px; max-width: 200px;">
+                        <option value=""> Category</option>
+                    </select>
 
-                <select id="category_id" class="form-select border-grey" style="max-width: 200px;">
-                    <option value="">Semua Category</option>
-                </select>
+                    <select id="status" name="status" class="form-select border-grey" style="min-width: 140px; max-width: 170px;">
+                        <option value=""> Status</option>
+                        <option value="todo">To Do</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="review">Review</option>
+                        <option value="done">Done</option>
+                    </select>
 
-                <select id="status" class="form-select border-grey" style="max-width: 170px;">
-                    <option value="">Semua Status</option>
-                    <option value="todo">To Do</option>
-                    <option value="in_progress">In Progress</option>
-                    <option value="review">Review</option>
-                    <option value="done">Done</option>
-                </select>
+                    <select id="priority" name="priority" class="form-select border-grey" style="min-width: 120px; max-width: 150px;">
+                        <option value="">Prioritas</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
 
-                <select id="priority" class="form-select border-grey" style="max-width: 150px;">
-                    <option value="">Semua Prioritas</option>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                </select>
-
-                @can('access', 'create')
-                    <a href="{{ route('tasks_add') }}" class="btn btn-blue">Tambah</a>
-                @endcan
-            </div>
-        </div> --}}
-        <div class="row gap-2 justify-content-center justify-content-md-between align-items-center mb-4 mx-0">
-            <div class="col-12 col-md-5 p-0">
-                <x-search-bar />
-            </div>
-            <div class="col-12 col-md-4 p-0 d-flex align-items-center gap-2">
-
-                <select id="project_id" name="project_id" class="form-select border-grey">
-                    <option value="">Semua Project</option>
-                    @foreach ($projects as $project)
-                        <option value="{{ $project->id }}">{{ $project->name }}</option>
-                    @endforeach
-                </select>
-
-
-                <select id="status" name="status" class="form-select border-grey">
-                    <option value="">Semua Status</option>
-                    <option value="1">Aktif</option>
-                    <option value="0">Tidak Aktif</option>
-                </select>
-                @can('access', 'create')
-                    <a href="{{ route('projects_add') }}" class="btn btn-blue">Tambah</a>
-                @endcan
+                    @can('access', 'create')
+                        <a href="{{ route('tasks_add') }}" class="btn btn-blue text-nowrap">Tambah</a>
+                    @endcan
+                </div>
             </div>
         </div>
         <div id="tasks"></div>

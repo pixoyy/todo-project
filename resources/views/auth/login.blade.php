@@ -36,12 +36,6 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <div class="form-check">
-                                        <input class="form-check-input border-grey" type="checkbox" name="remember" value="true" id="remember" @checked(old('remember'))>
-                                        <label class="form-check-label" for="remember">Remember me</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
                                         <button class="btn btn-blue w-100" type="submit">Login</button>
                                     </div>
                                 </form>

@@ -27,7 +27,22 @@ class ProjectRepository
 
     public function getById($id)
     {
-        $project = Project::find($id);
+        $project = Project::with([
+            'categories' => function ($query) {
+                $query->withCount('tasks')
+                    ->with([
+                        'tasks' => function ($taskQuery) {
+                            $taskQuery->with(['assignedAdmin'])
+                                ->orderByRaw("FIELD(status, 'todo', 'in_progress', 'review', 'done')")
+                                ->orderBy('due_date')
+                                ->orderByDesc('id');
+                        },
+                    ])
+                    ->orderBy('order')
+                    ->orderBy('id');
+            },
+        ])->find($id);
+
         return $project;
     }
 

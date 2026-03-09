@@ -43,10 +43,11 @@
             </div>
 
             <div class="col-12 col-md-4">
-                <label for="order" class="form-label">Urutan</label>
+                <label for="order" class="form-label">Urutan (opsional)</label>
                 <input type="number" name="order" id="order"
-                    class="form-control border-grey @error('order') is-invalid @enderror" value="{{ old('order', 0) }}"
-                    min="0">
+                    class="form-control border-grey @error('order') is-invalid @enderror" value="{{ old('order') }}"
+                    min="0" placeholder="Auto">
+                <small class="text-muted">Kosongkan untuk auto-increment</small>
                 @error('order')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -65,6 +66,7 @@
             </div>
 
             <div class="col-12 mt-4 text-end">
+                  <a href="{{ route(name: 'categories') }}" class="btn btn-outline-secondary">Kembali</a>
                 <button class="btn btn-blue" type="submit">Simpan</button>
             </div>
         </form>

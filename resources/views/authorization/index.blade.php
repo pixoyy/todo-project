@@ -2,18 +2,20 @@
 
 @section('main-content')
     <x-custom-card>
-        <div class="row gap-2 justify-content-center justify-content-md-between align-items-center mb-4 mx-0">
-            <div class="col-12 col-md-5 p-0">
+        <div class="row g-2 align-items-center mb-4">
+            <div class="col-12 col-lg-3">
                 <select id="role" name="role" class="form-select border-grey">
                     @foreach ($roles as $role)
                         <option value="{{ $role->id }}">{{ $role->name }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="col-12 col-md-6 p-0 d-flex align-items-center justify-content-start justify-content-md-end">
-                @can('access', 'update')
-                    <button type="button" id="btn-save" class="btn btn-blue d-none" disabled>Simpan Perubahan</a>
-                @endcan
+            <div class="col-12 col-lg-9">
+                <div class="d-flex align-items-center justify-content-start justify-content-lg-end">
+                    @can('access', 'update')
+                        <button type="button" id="btn-save" class="btn btn-blue d-none text-nowrap" disabled>Simpan Perubahan</button>
+                    @endcan
+                </div>
             </div>
         </div>
         <div id="records">

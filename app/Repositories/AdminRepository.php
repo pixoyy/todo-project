@@ -119,7 +119,7 @@ class AdminRepository
         if ($hasProjects || $hasAssignedTasks || $hasCreatedTasks) {
             return [
                 'status' => false,
-                'message' => 'User tidak dapat dihapus karena masih dipakai pada project/task.',
+                'message' => 'User tidak dapat dihapus karena sudah di assign pada task',
             ];
         }
 

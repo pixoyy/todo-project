@@ -31,8 +31,9 @@ class CategoryRepository
                 $query->where('project_id', $projectId);
             })
             ->orderByDesc('status')
-            ->orderBy('order')
-            ->orderByDesc('id')
+            ->orderBy('project_id', 'asc')
+            ->orderBy('order', 'asc')
+            ->orderBy('id', 'asc')
             ->paginate($n);
     }
 
@@ -48,11 +49,14 @@ class CategoryRepository
 
     public function create($request)
     {
+        // Auto-increment order: get max order + 1 for this project
+        $maxOrder = Category::where('project_id', $request->project_id)->max('order') ?? -1;
+        
         Category::create([
             'project_id' => $request->project_id,
             'name' => $request->name,
             'color' => $request->color,
-            'order' => $request->order ?? 0,
+            'order' => $request->order ?? ($maxOrder + 1),
             'status' => isset($request->status) ? $request->status : 0,
         ]);
     }
@@ -92,5 +96,21 @@ class CategoryRepository
             'status' => true,
             'message' => 'Category berhasil dihapus!',
         ];
+    }
+
+    public function getCategoriesByProject($projectId)
+    {
+        return Category::where('project_id', $projectId)
+            ->withCount('tasks')
+            ->orderBy('order')
+            ->orderBy('id')
+            ->get();
+    }
+
+    public function bulkUpdateOrder($orders)
+    {
+        foreach ($orders as $categoryId => $order) {
+            Category::where('id', $categoryId)->update(['order' => $order]);
+        }
     }
 }

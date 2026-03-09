@@ -118,4 +118,52 @@ class CategoryController extends Controller
 
         return response()->json($res);
     }
+
+    public function reorder()
+    {
+        return view('category.reorder', [
+            'projects' => $this->repo->getProjectOptions(),
+            'breadcrumb' => [
+                ['name' => 'Reorder Categories'],
+            ],
+        ]);
+    }
+
+    public function getCategoriesForReorder(Request $request)
+    {
+        $projectId = $request->query('project_id');
+        
+        if (!$projectId) {
+            return response()->json(['categories' => []]);
+        }
+
+        $categories = $this->repo->getCategoriesByProject($projectId);
+        
+        return response()->json(['categories' => $categories]);
+    }
+
+    public function bulkUpdate(Request $request)
+    {
+        $request->validate([
+            'project_id' => 'required|exists:projects,id',
+            'orders' => 'required|array',
+            'orders.*' => 'required|integer|min:0',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $this->repo->bulkUpdateOrder($request->orders);
+            DB::commit();
+            return response()->json([
+                'status' => true,
+                'message' => 'Order categories berhasil diperbarui!',
+            ]);
+        } catch (Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'status' => false,
+                'message' => 'Terjadi kesalahan! Silakan coba lagi!',
+            ], 500);
+        }
+    }
 }

@@ -25,7 +25,7 @@
             </div>
 
             <div class="col-12 mt-5 text-end">
-                <a href="{{ route('roles') }}" class="btn btn-secondary">Back</a>
+                  <a href="{{ route('roles') }}" class="btn btn-outline-secondary">Kembali</a>
                 <button class="btn btn-blue" type="submit">Simpan</button>
             </div>
         </form>

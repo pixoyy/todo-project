@@ -16,16 +16,6 @@ Route::middleware(['throttle:global', 'guest'])->group(function () {
         Route::post('/', [AuthController::class, 'login'])->name('login_post');
     });
 
-
-    // Route::prefix('/forgot-password')->group(function () {
-    //     Route::get('/', [AuthController::class, 'forgotPasswordView'])->name('forgot-password');
-    //     Route::post('/', [AuthController::class, 'forgotPassword'])->name('forgot-password_post');
-    // });
-
-    // Route::prefix('/reset-password')->group(function () {
-    //     Route::get('/', [AuthController::class, 'resetPasswordView'])->name('reset-password');
-    //     Route::post('/', [AuthController::class, 'resetPassword'])->name('reset-password_post');
-    // });
 });
 
 Route::middleware(['throttle:global', 'auth'])->group(function () {
@@ -47,6 +37,9 @@ Route::middleware(['throttle:global', 'auth'])->group(function () {
     Route::prefix('/categories')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('categories')->middleware('access:read');
         Route::get('/data', [CategoryController::class, 'data'])->name('categories_data')->middleware('access:read');
+        Route::get('/reorder', [CategoryController::class, 'reorder'])->name('categories_reorder')->middleware('access:update');
+        Route::get('/reorder/data', [CategoryController::class, 'getCategoriesForReorder'])->name('categories_reorder_data')->middleware('access:update');
+        Route::patch('/reorder', [CategoryController::class, 'bulkUpdate'])->name('categories_bulk_update')->middleware('access:update');
         Route::get('/add', [CategoryController::class, 'add'])->name('categories_add')->middleware('access:create');
         Route::post('/add', [CategoryController::class, 'create'])->name('categories_create')->middleware('access:create');
         Route::get('/{id}', [CategoryController::class, 'detail'])->name('categories_detail')->middleware('access:read');

@@ -29,4 +29,17 @@ class Project extends Model
     {
         return $this->hasMany(Category::class, 'project_id', 'id');
     }
+    
+    public function tasks()
+    {
+        return $this->hasManyThrough(
+            Task::class,
+            Category::class,
+            'project_id',
+            'category_id',
+            'id',
+            'id'
+        );
+    }
 }
+

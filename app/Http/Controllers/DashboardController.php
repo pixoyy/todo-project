@@ -16,7 +16,8 @@ class DashboardController extends Controller
     }
     public function index()
     {
-        return view('dashboard.index');
+        $data = $this->repo->getData(request());
+        return view('dashboard.index', $data);
     }
 
     public function data(Request $request){

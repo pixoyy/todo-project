@@ -68,6 +68,7 @@
             </div>
 
             <div class="col-12 mt-4 text-end">
+                <a href="{{ route('categories') }}" class="btn btn-outline-secondary">Kembali</a>
                 <button class="btn btn-blue" type="submit">Simpan</button>
             </div>
         </form>
