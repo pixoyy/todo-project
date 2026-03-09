@@ -40,7 +40,8 @@
                 <label for="phone_number" class="form-label">Nomor Telepon</label>
                 <input type="text" name="phone_number" id="phone_number"
                     class="form-control border-grey @error('phone_number') is-invalid @enderror"
-                    value="{{ old('phone_number') }}" required>
+                    value="{{ old('phone_number') }}" inputmode="numeric" pattern="[0-9]*" maxlength="20"
+                    minlength="8" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required>
                 @error('phone_number')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

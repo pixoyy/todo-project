@@ -95,7 +95,9 @@
                     <option value="">Tidak ditentukan</option>
                     @foreach ($admins as $admin)
                         <option value="{{ $admin->id }}"
-                            @selected(old('assigned_admin_id', $task->assigned_admin_id) == $admin->id)>{{ $admin->name }}</option>
+                            @selected(old('assigned_admin_id', $task->assigned_admin_id) == $admin->id)>
+                            {{ $admin->name }}{{ $admin->role ? ' (' . $admin->role->name . ')' : ' (Tanpa Role)' }}
+                        </option>
                     @endforeach
                 </select>
                 @error('assigned_admin_id')

@@ -26,7 +26,8 @@ class AdminRequest extends FormRequest
                 'max:100',
                 Rule::unique('admins', 'email')->whereNull('deleted_at')->ignore($id),
             ],
-            'phone_number' => 'required|string|max:20',
+            // Use digits_between to enforce integer-like input while preserving leading zero.
+            'phone_number' => 'required|digits_between:8,20',
             'status' => 'required|integer|in:0,1',
             'password' => $passwordRule,
         ];
@@ -43,7 +44,7 @@ class AdminRequest extends FormRequest
             'email.email' => 'Format email tidak valid.',
             'email.unique' => 'Email sudah digunakan user lain.',
             'phone_number.required' => 'Nomor telepon wajib diisi.',
-            'phone_number.max' => 'Nomor telepon maksimal 20 karakter.',
+            'phone_number.digits_between' => 'Nomor telepon harus berupa angka 8 sampai 20 digit.',
             'status.required' => 'Status user wajib dipilih.',
             'status.in' => 'Status user tidak valid.',
             'password.required' => 'Password wajib diisi.',

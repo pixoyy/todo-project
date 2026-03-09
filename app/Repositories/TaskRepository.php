@@ -64,7 +64,10 @@ class TaskRepository
             'projects' => Project::with(['categories' => function ($q) {
                 $q->orderBy('order')->orderBy('name');
             }])->orderBy('name')->get(['id', 'name']),
-            'admins' => Admin::where('status', 1)->orderBy('name')->get(['id', 'name']),
+            'admins' => Admin::with(['role:id,name'])
+                ->where('status', 1)
+                ->orderBy('name')
+                ->get(['id', 'name', 'role_id']),
         ];
     }
 
