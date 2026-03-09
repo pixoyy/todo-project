@@ -1,0 +1,96 @@
+<?php
+
+namespace App\Repositories;
+
+use App\Models\Category;
+use App\Models\Project;
+use App\Models\Task;
+
+class CategoryRepository
+{
+    public function getData($request, $n = 10)
+    {
+        $search = $request->query('query');
+        $status = $request->query('status');
+        $projectId = $request->query('project_id');
+
+        return Category::with(['project'])
+            ->withCount('tasks')
+            ->when(!empty($search), function ($query) use ($search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'LIKE', "%$search%")
+                        ->orWhereHas('project', function ($p) use ($search) {
+                            $p->where('name', 'LIKE', "%$search%");
+                        });
+                });
+            })
+            ->when(!empty($status) || $status === 0 || $status === '0', function ($query) use ($status) {
+                $query->where('status', $status);
+            })
+            ->when(!empty($projectId), function ($query) use ($projectId) {
+                $query->where('project_id', $projectId);
+            })
+            ->orderByDesc('status')
+            ->orderBy('order')
+            ->orderByDesc('id')
+            ->paginate($n);
+    }
+
+    public function getById($id)
+    {
+        return Category::with(['project'])->withCount('tasks')->find($id);
+    }
+
+    public function getProjectOptions()
+    {
+        return Project::orderBy('name')->get(['id', 'name']);
+    }
+
+    public function create($request)
+    {
+        Category::create([
+            'project_id' => $request->project_id,
+            'name' => $request->name,
+            'color' => $request->color,
+            'order' => $request->order ?? 0,
+            'status' => isset($request->status) ? $request->status : 0,
+        ]);
+    }
+
+    public function update($id, $request)
+    {
+        Category::where('id', $id)->update([
+            'project_id' => $request->project_id,
+            'name' => $request->name,
+            'color' => $request->color,
+            'order' => $request->order ?? 0,
+            'status' => isset($request->status) ? $request->status : 0,
+        ]);
+    }
+
+    public function delete($id)
+    {
+        $category = Category::find($id);
+        if (!$category) {
+            return [
+                'status' => false,
+                'message' => 'Category tidak ditemukan!',
+            ];
+        }
+
+        $hasTasks = Task::where('category_id', $id)->exists();
+        if ($hasTasks) {
+            return [
+                'status' => false,
+                'message' => 'Category tidak dapat dihapus karena masih memiliki task.',
+            ];
+        }
+
+        $category->delete();
+
+        return [
+            'status' => true,
+            'message' => 'Category berhasil dihapus!',
+        ];
+    }
+}

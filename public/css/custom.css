@@ -1,0 +1,293 @@
+@font-face {
+    font-family: 'Cabinet Grotesk';
+    src: url('fonts/CabinetGrotesk.ttf');
+}
+
+:root {
+    --clr-blue: #582f8b;
+    --clr-light-blue: #c4c4eebf;
+    --clr-grey: #666666;
+    --clr-light-grey: #c4c4c4;
+    --clr-black: #252525;
+    --font-poppins: 'Poppins', sans-serif;
+    --font-grotesk: 'Cabinet Grotesk', sans-serif;
+    --btn-blue: #582f8b;
+    --btn-dark-blue: #180868;
+    --btn-grey: #dfdfdf80;
+}
+
+.text-blue {
+    color: var(--clr-blue) !important;
+}
+
+.bg-blue {
+    background-color: var(--clr-blue) !important;
+}
+
+.text-grey {
+    color: var(--clr-grey) !important;
+}
+
+.text-black {
+    color: var(--clr-black) !important;
+}
+
+.border-grey {
+    border-color: var(--clr-light-grey);
+}
+
+.border-grey:focus {
+    border-color: var(--clr-blue);
+    box-shadow: 0 0 0 0.25rem var(--clr-light-blue);
+}
+
+.font-poppins {
+    font-family: var(--font-poppins) !important;
+}
+
+.font-grotesk {
+    font-family: var(--font-grotesk) !important;
+}
+
+.btn-blue {
+    background-color: var(--btn-blue) !important;
+    border-color: var(--btn-blue) !important;
+    color: white !important;
+    transition: all 0.5s;
+}
+
+.btn-blue:hover, .btn-blue:active {
+    background-color: var(--btn-dark-blue) !important;
+    border-color: var(--btn-dark-blue) !important;
+}
+
+.btn-grey {
+    background-color: var(--btn-grey) !important;
+    border-color: var(--btn-grey) !important;
+}
+
+::placeholder {
+    color: var(--clr-light-grey) !important;
+}
+
+body {
+    font-family: var(--font-poppins) !important;
+    color: var(--clr-grey);
+}
+
+input[type=checkbox]:checked {
+    accent-color: var(--clr-blue) !important;
+    background-color: var(--clr-blue) !important;
+    border-color: var(--clr-blue) !important;
+}
+
+.logo img {
+    max-width: 170px;
+    max-height: 170px;
+    margin-right: 0;
+}
+
+@media (max-width: 575px) {
+    .logo img {
+        max-width: 150px;
+        max-height: 150px;
+    }
+}
+
+.header {
+    padding-left: 320px;
+}
+
+@media (max-width: 1199px) {
+    .header {
+        padding-left: 10px;
+    }
+}
+
+.breadcrumb .breadcrumb-item a, .breadcrumb .breadcrumb-item.active, .breadcrumb .breadcrumb-item::before {
+    color: white;
+    transition: all 0.5s;
+}
+
+.breadcrumb .breadcrumb-item a:hover {
+    color: var(--clr-light-grey);
+}
+
+.sidebar {
+    top: 0;
+    z-index: 998;
+}
+
+.sidebar-nav .nav-link, .sidebar-nav .nav-link.collapsed {
+    color: var(--clr-grey) !important;
+    background-color: white;
+    transition: all 0.5s;
+}
+
+.sidebar-nav .nav-link.active, .sidebar-nav .nav-link.collapsed.active {
+    color: white !important;
+    background-color: var(--clr-blue) !important;
+}
+
+.sidebar-nav .nav-link:not(.active):hover, .sidebar-nav .nav-link.collapsed:not(.active):hover {
+    background-color: var(--clr-light-blue);
+}
+
+.sidebar-nav .nav-content .child-link {
+    color: var(--clr-grey) !important;
+}
+
+.sidebar-nav .nav-content .child-link.active {
+    color: var(--clr-blue) !important;
+}
+
+.sidebar-nav .nav-content .child-link:not(.active):hover {
+    background-color: var(--clr-light-blue);
+}
+
+.main-content {
+    padding-top: 100px;
+    padding-left: 330px;
+    padding-right: 30px;
+    transition: all 0.5s;
+}
+
+@media (max-width: 1199px) {
+    .main-content {
+        padding-left: 30px;
+    }
+}
+
+#records {
+    overflow-x: auto;
+}
+
+.table-blue {
+    --bs-table-bg: var(--clr-blue);
+    --bs-table-color: white;
+}
+
+.table th, .table td {
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}
+
+.pagination {
+    --bs-pagination-color: var(--clr-blue);
+    --bs-pagination-active-color: white;
+    --bs-pagination-active-bg: var(--clr-blue);
+    --bs-pagination-active-border-color: var(--clr-blue);
+}
+
+#toast-container .toast {
+    opacity: 1;
+}
+
+.search-bar {
+    margin-left: 20px;
+}
+
+.search-bar #query {
+    font-size: 14px;
+    color: var(--clr-grey);
+    border-width: 1px;
+    border-style: solid;
+    padding: 7px 8px 7px 38px;
+    border-radius: 3px;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.search-bar #query:focus {
+    outline: 0;
+}
+
+.search-bar button {
+    z-index: 10;
+    border: 0;
+    padding: 0;
+    margin-right: -30px;
+    background: none;
+}
+
+.search-bar button i {
+    color: var(--clr-light-grey);
+}
+
+.ck-editor__editable_inline {
+    min-height: 150px;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.ck-editor__editable_inline.border-grey {
+    border-color: var(--clr-light-grey) !important;
+}
+
+.ck-editor__editable_inline.border-grey:focus {
+    border-color: var(--clr-blue) !important;
+    box-shadow: 0 0 0 0.25rem var(--clr-light-blue) !important;
+}
+
+.ck-editor__editable_inline.is-invalid {
+    border-color: var(--bs-form-invalid-border-color) !important;
+}
+
+.ck-editor__editable_inline.is-invalid:focus {
+    border-color: var(--bs-form-invalid-border-color) !important;
+    box-shadow: 0 0 0 .25rem rgba(var(--bs-danger-rgb), .25) !important;
+}
+
+.image-input-container {
+    height: 150px;
+    border: 1px dashed var(--clr-light-grey);
+    border-radius: var(--bs-border-radius);
+    cursor: pointer;
+    background-image: url('../images/image-placeholder.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-clip: content-box;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+.image-input-preview, .single-image-preview {
+    background-color: var(--clr-light-grey);
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: opacity 0.75s;
+}
+
+.preview-container {
+    width: 100%;
+}
+
+.image-action-button, .single-image-action-button {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.multiple-images-container {
+    border: 1px dashed var(--clr-light-grey);
+    border-radius: var(--bs-border-radius);
+    padding: 0.75rem;
+}
+
+.nav-tabs .nav-link {
+    background-color: var(--clr-light-grey);
+    opacity: 0.75;
+    color: var(--clr-grey);
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--clr-blue);
+    opacity: 1;
+    font-weight: bold;
+}
+
+.nav-tabs .nav-link:not(.active):hover {
+    background-color: var(--clr-light-blue);
+    color: var(--clr-blue);
+    font-weight: 500;
+}
