@@ -21,10 +21,10 @@
                     <div class="d-flex align-items-center gap-2">
                         @if ($role->name != 'Master')
                             @can('access', 'update')
-                                <x-edit-action-button :route="route('role_edit', $role->id)" />  
+                                <x-edit-action-button :route="route('roles_edit', $role->id)" />
                             @endcan
                             @can('access', 'delete')
-                                <x-delete-action-button :route="route('role_delete', $role->id)" />
+                                <x-delete-action-button :route="route('roles_delete', $role->id)" />
                             @endcan
                         @endif
                     </div>

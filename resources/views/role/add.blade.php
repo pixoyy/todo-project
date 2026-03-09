@@ -2,7 +2,7 @@
 
 @section('main-content')
     <x-custom-card>
-        <form class="row g-3" method="POST" action="{{ route('role_create') }}">
+        <form class="row g-3" method="POST" action="{{ route('roles_create') }}">
             @csrf
             <div class="col-12">
                 <label for="name" class="form-label">Nama Peran</label>
@@ -25,7 +25,7 @@
             </div>
 
             <div class="col-12 mt-5 text-end">
-                <a href="{{ route('role') }}" class="btn btn-secondary">Back</a>
+                <a href="{{ route('roles') }}" class="btn btn-secondary">Back</a>
                 <button class="btn btn-blue" type="submit">Simpan</button>
             </div>
         </form>

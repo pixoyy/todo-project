@@ -65,13 +65,29 @@ Route::middleware(['throttle:global', 'auth'])->group(function () {
         Route::patch('/edit/{id}', [TaskController::class, 'update'])->name('tasks_update')->middleware('access:update');
         Route::delete('/{id}', [TaskController::class, 'delete'])->name('tasks_delete')->middleware('access:delete');
     });
+
     Route::prefix('/roles')->group(function () {
         Route::get('/', [RoleController::class, 'index'])->name('roles')->middleware('access:read');
+        Route::get('/data', [RoleController::class, 'data'])->name('roles_data')->middleware('access:read');
+        Route::get('/add', [RoleController::class, 'add'])->name('roles_add')->middleware('access:create');
+        Route::post('/add', [RoleController::class, 'create'])->name('roles_create')->middleware('access:create');
+        Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('roles_edit')->middleware('access:update');
+        Route::patch('/edit/{id}', [RoleController::class, 'update'])->name('roles_update')->middleware('access:update');
+        Route::delete('/{id}', [RoleController::class, 'delete'])->name('roles_delete')->middleware('access:delete');
     });
     Route::prefix('/users')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('users')->middleware('access:read');
+        Route::get('/data', [AdminController::class, 'data'])->name('users_data')->middleware('access:read');
+        Route::get('/add', [AdminController::class, 'add'])->name('users_add')->middleware('access:create');
+        Route::post('/add', [AdminController::class, 'create'])->name('users_create')->middleware('access:create');
+        Route::get('/{id}', [AdminController::class, 'detail'])->name('users_detail')->middleware('access:read');
+        Route::get('/edit/{id}', [AdminController::class, 'edit'])->name('users_edit')->middleware('access:update');
+        Route::patch('/edit/{id}', [AdminController::class, 'update'])->name('users_update')->middleware('access:update');
+        Route::delete('/{id}', [AdminController::class, 'delete'])->name('users_delete')->middleware('access:delete');
     });
     Route::prefix('/authorization')->group(function () {
         Route::get('/', [AuthorizationController::class, 'index'])->name('authorization')->middleware('access:read');
+        Route::get('/change-role', [AuthorizationController::class, 'changeRole'])->name('authorization_change_role')->middleware('access:read');
+        Route::patch('/', [AuthorizationController::class, 'save'])->name('authorization_save')->middleware('access:update');
     });
 });

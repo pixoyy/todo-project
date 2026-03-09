@@ -4,7 +4,7 @@
     <x-custom-card>
         <div class="d-flex justify-content-end mb-4">
             @can('access', 'create')
-                <a href="{{ route('role_add') }}" class="btn btn-blue">Tambah</a>
+                <a href="{{ route('roles_add') }}" class="btn btn-blue">Tambah</a>
             @endcan
         </div>
         <div id="records"></div>
@@ -31,7 +31,7 @@
 
         function loadData(page) {
             $.ajax({
-                url: "{{ route('role_data') }}",
+                url: "{{ route('roles_data') }}",
                 method: 'GET',
                 data: {
                     page,

@@ -15,6 +15,11 @@ class Admin extends Authenticatable implements CanResetPassword,MustVerifyEmail
     protected $table = 'admins';
     protected $guarded = [];
 
+    protected $casts = [
+        'last_login' => 'datetime',
+        'status' => 'integer',
+    ];
+
     protected $hidden = [
         'password',
         'remember_token',

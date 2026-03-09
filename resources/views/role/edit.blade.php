@@ -2,7 +2,7 @@
 
 @section('main-content')
     <x-custom-card>
-        <form id="form-edit" class="row g-3" method="POST" action="{{ route('role_update', $role->id) }}">
+        <form id="form-edit" class="row g-3" method="POST" action="{{ route('roles_update', $role->id) }}">
             @method('PATCH')
             @csrf
             <div class="col-12">
@@ -26,7 +26,7 @@
             </div>
 
             <div class="col-12 mt-5 text-end">
-                <a href="{{ route('role') }}" class="btn btn-secondary">Back</a>
+                <a href="{{ route('roles') }}" class="btn btn-secondary">Back</a>
                 <button id="btn-submit" class="btn btn-blue" type="button">Simpan</button>
             </div>
         </form>

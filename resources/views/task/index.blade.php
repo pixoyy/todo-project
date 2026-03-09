@@ -2,11 +2,12 @@
 
 @section('main-content')
     <x-custom-card>
-        <div class="row gap-2 justify-content-center justify-content-md-between align-items-center mb-4 mx-0">
-            <div class="col-12 col-md-4 p-0">
+        {{-- <div class="d-flex align-items-center gap-2 flex-nowrap overflow-auto mb-4 pb-1">
+            <div style="min-width: 240px;">
                 <x-search-bar />
             </div>
-            <div class="col-12 col-md-8 p-0 d-flex flex-wrap align-items-center gap-2">
+
+            <div class="d-flex align-items-center gap-2 flex-nowrap">
                 <select id="project_id" class="form-select border-grey" style="max-width: 200px;">
                     <option value="">Semua Project</option>
                     @foreach ($projects as $project)
@@ -37,8 +38,31 @@
                     <a href="{{ route('tasks_add') }}" class="btn btn-blue">Tambah</a>
                 @endcan
             </div>
-        </div>
+        </div> --}}
+        <div class="row gap-2 justify-content-center justify-content-md-between align-items-center mb-4 mx-0">
+            <div class="col-12 col-md-5 p-0">
+                <x-search-bar />
+            </div>
+            <div class="col-12 col-md-4 p-0 d-flex align-items-center gap-2">
 
+                <select id="project_id" name="project_id" class="form-select border-grey">
+                    <option value="">Semua Project</option>
+                    @foreach ($projects as $project)
+                        <option value="{{ $project->id }}">{{ $project->name }}</option>
+                    @endforeach
+                </select>
+
+
+                <select id="status" name="status" class="form-select border-grey">
+                    <option value="">Semua Status</option>
+                    <option value="1">Aktif</option>
+                    <option value="0">Tidak Aktif</option>
+                </select>
+                @can('access', 'create')
+                    <a href="{{ route('projects_add') }}" class="btn btn-blue">Tambah</a>
+                @endcan
+            </div>
+        </div>
         <div id="tasks"></div>
     </x-custom-card>
 @endsection
@@ -134,5 +158,3 @@
         }
     </script>
 @endpush
-
-

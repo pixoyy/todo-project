@@ -41,10 +41,10 @@ class RoleController extends Controller
         try {
             $this->repo->create($request);
             DB::commit();
-            return redirect()->route('role')->with('message', 'Data peran berhasil ditambahkan!');
+            return redirect()->route('roles')->with('message', 'Data peran berhasil ditambahkan!');
         } catch (Throwable $th) {
             DB::rollBack();
-            return redirect()->route('role_add')->withInput()->with('message', 'Terjadi kesalahan! Silakan coba lagi!');
+            return redirect()->route('roles_add')->withInput()->with('message', 'Terjadi kesalahan! Silakan coba lagi!');
         }
     }
 
@@ -52,7 +52,7 @@ class RoleController extends Controller
     {
         $role = $this->repo->getById($id);
         if (!isset($role)) {
-            return redirect()->route('role');
+            return redirect()->route('roles');
         }
 
         return view('role.edit', [
@@ -69,10 +69,10 @@ class RoleController extends Controller
         try {
             $this->repo->update($id, $request);
             DB::commit();
-            return redirect()->route('role')->with('message', 'Data peran berhasil diperbarui!');
+            return redirect()->route('roles')->with('message', 'Data peran berhasil diperbarui!');
         } catch (Throwable $th) {
             DB::rollBack();
-            return redirect()->route('role_edit', $id)->withInput()->with('message', 'Terjadi kesalahan! Silakan coba lagi!');
+            return redirect()->route('roles_edit', $id)->withInput()->with('message', 'Terjadi kesalahan! Silakan coba lagi!');
         }
     }
 
